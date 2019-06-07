@@ -9,10 +9,10 @@
 $ roscore
 $ rosrun uvc_camera uvc_camera_node /image_raw:=/camera/image_raw
 $ roslaunch darknet_ros yolo_v3.launch
-$ rosrun sound_play soundplay_node2.py
-$ rosrun snd_play test
-$ rosrun snd_play soundplay_node.py
-```
+$ rosrun sound_play soundplay_node.py
+$ rosrun sound_play test
+$ rosrun robot_controller robot_controller
+`
 ## Contribution
 SDK read_write.cpp  -> ROS package
 
