@@ -45,4 +45,4 @@ SDK read_write.cpp  -> ROS package
 ## Reference
 - [uvc_camera](http://wiki.ros.org/uvc_camera/)
 - [darknet_ros](https://github.com/leggedrobotics/darknet_ros/)
-- [audio_common](https://github.com/ros-drivers/audio_common)
+- [audio_common (sound_play)](https://github.com/ros-drivers/audio_common)
