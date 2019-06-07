@@ -63,7 +63,6 @@ void detectedObjectClassSubscriberCallback(const std_msgs::String::ConstPtr& ima
   ROS_INFO("3333");
   sleep(3);
 
-
   return;
 }
 

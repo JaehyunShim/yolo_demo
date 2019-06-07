@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robot_controller</name>
+  <version>1.0.0</version>
+  <description>The robot_controller package</description>
+  <license>Apache 2.0</license>
+  <author email="jhshim@robotis.com">Ryan Shim</author>
+  <maintainer email="jhshim@robotis.com">Ryan Shim</maintainer>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>dynamixel_sdk</depend>
+</package>
