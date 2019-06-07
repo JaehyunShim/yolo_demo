@@ -24,10 +24,18 @@ $ sudo apt-get install ros-kinetic-uvc-camera
 ### Execute ROS packages
 ```sh
 $ roscore
+
+(uvc camera)
 $ rosrun uvc_camera uvc_camera_node /image_raw:=/camera/image_raw
+
+(darknet)
 $ roslaunch darknet_ros yolo_v3.launch
+
+(uvc camera)
 $ rosrun sound_play soundplay_node.py
 $ rosrun sound_play test
+
+(robot controller)
 $ rosrun robot_controller robot_controller
 ```
 
