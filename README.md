@@ -1,7 +1,7 @@
 # YOLO_test
 
 $ roscore
-$ rosrun uvcamera uvc_camera_node /image_raw:=/camera/image_raw
+$ rosrun uvc_camera uvc_camera_node /image_raw:=/camera/image_raw
 $ roslaunch darknet_ros yolo_v3.launch
 $ rosrun sound_play soundplay_node2.py
 $ 
