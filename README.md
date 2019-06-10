@@ -37,7 +37,6 @@ $ roslaunch object_reader object_reader.launch
 (robot controller)
 $ rosrun robot_controller robot_controller
 ```
-
 ## Contribution
 SDK read_write.cpp  -> ROS package
 
