@@ -37,9 +37,6 @@ $ roslaunch object_reader object_reader.launch
 (robot controller)
 $ rosrun robot_controller robot_controller
 ```
-## Contribution
-SDK read_write.cpp  -> ROS package
-
 ## Reference
 - [uvc_camera](http://wiki.ros.org/uvc_camera/)
 - [darknet_ros](https://github.com/leggedrobotics/darknet_ros/)
