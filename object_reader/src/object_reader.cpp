@@ -32,35 +32,26 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-#include <sound_play/sound_play.h>
 #include <unistd.h>
+#include <sound_play/sound_play.h>
 
 // darknet_ros_msgs
 #include "std_msgs/String.h"
-#include <darknet_ros_msgs/BoundingBoxes.h>
-#include <darknet_ros_msgs/BoundingBox.h>
-#include <darknet_ros_msgs/CheckForObjectsAction.h>
-
-std::string detectedObjectClass;
 
 void sleepok(int t, ros::NodeHandle &nh)
 {
   if (nh.ok())
       sleep(t);
 }
-//void boundingBoxesSubscriberCallback(const darknet_ros_msgs::BoundingBoxes& imageInfo)
+
 void detectedObjectClassSubscriberCallback(const std_msgs::String::ConstPtr& imageClass)
 {
-  ROS_INFO("1111");
-  detectedObjectClass = "a string";
   sound_play::SoundClient sc;
   sound_play::SoundClient quiet_sc;
  
-//  ROS_INFO("%p", imageInfo->bounding_boxes);
   ROS_INFO("%s", imageClass->data.c_str());
-
   sc.say(imageClass->data.c_str());
-  ROS_INFO("3333");
+
   sleep(3);
 
   return;
@@ -68,21 +59,17 @@ void detectedObjectClassSubscriberCallback(const std_msgs::String::ConstPtr& ima
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "sound_play_test");
+  ros::init(argc, argv, "object_reader");
 
   ros::NodeHandle nh;
   sound_play::SoundClient sc;
   sound_play::SoundClient quiet_sc;
 
   // Subscribe detected object names
-//  ros::Subscriber boundingBoxesSubscriber_;
   ros::Subscriber detectedObjectClassSubscriber_;
-
-//  boundingBoxesSubscriber_ = nh.subscribe("/darknet_ros/bounding_boxes", 1, boundingBoxesSubscriberCallback); 
   detectedObjectClassSubscriber_ = nh.subscribe("/darknet_ros/detectedImageClass", 1, detectedObjectClassSubscriberCallback); 
-  ROS_INFO("1111");
-  ros::spin();  
 
+  ros::spin();  
 }
 
 

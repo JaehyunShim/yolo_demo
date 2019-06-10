@@ -7,7 +7,6 @@
   <author email="jhshim@robotis.com">Ryan Shim</author>
   <maintainer email="jhshim@robotis.com">Ryan Shim</maintainer>
   <buildtool_depend>catkin</buildtool_depend>
-  <buildtool_depend>catkin</buildtool_depend>
   <depend>roscpp</depend>
   <depend>sound_play</depend>
 </package>
