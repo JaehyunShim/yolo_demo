@@ -31,8 +31,8 @@ $ rosrun uvc_camera uvc_camera_node /image_raw:=/camera/image_raw
 (darknet)
 $ roslaunch darknet_ros yolo_v3.launch
 
-(sound play)
-$ roslaunch sound_play soundplay_node.launch
+(object reader)
+$ roslaunch object_reader object_reader.launch
 
 (robot controller)
 $ rosrun robot_controller robot_controller
