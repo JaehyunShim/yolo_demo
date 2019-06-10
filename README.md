@@ -41,3 +41,4 @@ $ rosrun robot_controller robot_controller
 - [uvc_camera](http://wiki.ros.org/uvc_camera/)
 - [darknet_ros](https://github.com/leggedrobotics/darknet_ros/)
 - [audio_common (sound_play)](https://github.com/ros-drivers/audio_common)
+- [DynamixelSDK](https://github.com/ROBOTIS-GIT/DynamixelSDK)
