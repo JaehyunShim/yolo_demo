@@ -31,18 +31,16 @@ $ rosrun uvc_camera uvc_camera_node /image_raw:=/camera/image_raw
 (darknet)
 $ roslaunch darknet_ros yolo_v3.launch
 
-(uvc camera)
-$ rosrun sound_play soundplay_node.py
-$ rosrun sound_play test
+(object reader)
+$ roslaunch object_reader object_reader.launch
 
 (robot controller)
 $ rosrun robot_controller robot_controller
 ```
-
 ## Contribution
 SDK read_write.cpp  -> ROS package
 
 ## Reference
 - [uvc_camera](http://wiki.ros.org/uvc_camera/)
 - [darknet_ros](https://github.com/leggedrobotics/darknet_ros/)
-- [audio_common](https://github.com/ros-drivers/audio_common)
+- [audio_common (sound_play)](https://github.com/ros-drivers/audio_common)
