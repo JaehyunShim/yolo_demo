@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>object_reader</name>
+  <version>1.0.0</version>
+  <description>The object_reader package</description>
+  <license>Apache 2.0</license>
+  <author email="jhshim@robotis.com">Ryan Shim</author>
+  <maintainer email="jhshim@robotis.com">Ryan Shim</maintainer>
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>sound_play</depend>
+</package>
