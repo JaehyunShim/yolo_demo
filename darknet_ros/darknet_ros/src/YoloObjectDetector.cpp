@@ -9,12 +9,8 @@
 // yolo object detector
 #include "darknet_ros/YoloObjectDetector.hpp"
 
-// needed to publish to the sound_play node.
-#include <sound_play/sound_play.h>
-
 // needed to publish to the DXLController
 #include <sensor_msgs/JointState.h>
-
 
 // Check for xServer
 #include <X11/Xlib.h>
@@ -90,9 +86,6 @@ void YoloObjectDetector::init()
 {
   ROS_INFO("[YoloObjectDetector] init().");
 
-  // needed to publish to the sound_play node.
-  sound_play::SoundClient sc;
-
   // Initialize deep network of darknet.
   std::string weightsPath;
   std::string configPath;
@@ -106,19 +99,15 @@ void YoloObjectDetector::init()
 
   // Path to weights file.
   nodeHandle_.param("yolo_model/weight_file/name", weightsModel,
-//                    std::string("yolov2-tiny.weights"));
-                    std::string("yolov3.weights"));
-//  nodeHandle_.param("weights_path", weightsPath, std::string("/default"));
-  nodeHandle_.param("weights_path", weightsPath, std::string("/home/robotis/catkin_ws/src/YOLO/darknet_ros/darknet_ros/yolo_network_config/weights"));
+                    std::string("yolov2-tiny.weights"));
+  nodeHandle_.param("weights_path", weightsPath, std::string("/default"));
   weightsPath += "/" + weightsModel;
   weights = new char[weightsPath.length() + 1];
   strcpy(weights, weightsPath.c_str());
 
   // Path to config file.
-//  nodeHandle_.param("yolo_model/config_file/name", configModel, std::string("yolov2-tiny.cfg"));
-  nodeHandle_.param("yolo_model/config_file/name", configModel, std::string("yolov3.cfg"));
-//  nodeHandle_.param("config_path", configPath, std::string("/default"));
-  nodeHandle_.param("config_path", configPath, std::string("/home/robotis/catkin_ws/src/YOLO/darknet_ros/darknet_ros/yolo_network_config/cfg"));
+  nodeHandle_.param("yolo_model/config_file/name", configModel, std::string("yolov2-tiny.cfg"));
+  nodeHandle_.param("config_path", configPath, std::string("/default"));
   configPath += "/" + configModel;
   cfg = new char[configPath.length() + 1];
   strcpy(cfg, configPath.c_str());
@@ -176,19 +165,16 @@ void YoloObjectDetector::init()
   objectPublisher_ = nodeHandle_.advertise<std_msgs::Int8>(objectDetectorTopicName,
                                                            objectDetectorQueueSize,
                                                            objectDetectorLatch);
-
-//publish to the sound_play node.
-//  ros::Publish 
-//  detece = nodeHandle_.advertise<darknet_ros_msgs::BoundingBoxes>(
-//      boundingBoxesTopicName, boundingBoxesQueueSize, boundingBoxesLatch);
-
-  detectedObjectClassPublisher_ = nodeHandle_.advertise<std_msgs::String>("detectedImageClass", 1);
-  Command2MotorPublisher_ = nodeHandle_.advertise<sensor_msgs::JointState>("goal_dynamixel_position", 1);
   boundingBoxesPublisher_ = nodeHandle_.advertise<darknet_ros_msgs::BoundingBoxes>(
       boundingBoxesTopicName, boundingBoxesQueueSize, boundingBoxesLatch);
   detectionImagePublisher_ = nodeHandle_.advertise<sensor_msgs::Image>(detectionImageTopicName,
                                                                        detectionImageQueueSize,
                                                                        detectionImageLatch);
+
+//-------------------------------------------------------------modified
+  detectedObjectClassPublisher_ = nodeHandle_.advertise<std_msgs::String>("detectedImageClass", 1);
+  cmd2RobotPublisher_ = nodeHandle_.advertise<std_msgs::Int8>("goal_dynamixel_position", 1);
+//-------------------------------------------------------------
 
   // Action servers.
   std::string checkForObjectsActionName;
@@ -617,11 +603,13 @@ void *YoloObjectDetector::publishInThread()
     objectPublisher_.publish(msg);
 
 
-    // To Sound_play
-    std_msgs::String boundingBoxClass_;
-//    std::string boundingBoxClass_;
-    // To DXLPositionController
-    sensor_msgs::JointState Cmd2Motor;
+//-------------------------------------------------------------modified
+    // To object_reader
+    std_msgs::String boundingBoxClass;
+
+    // To robot_controller
+    std_msgs::Int8 cmd2Robot;
+//------------------------------------------------------------------
 
     for (int i = 0; i < numClasses_; i++) {
       if (rosBoxCounter_[i] > 0) {
@@ -632,10 +620,10 @@ void *YoloObjectDetector::publishInThread()
           int xmax = (rosBoxes_[i][j].x + rosBoxes_[i][j].w / 2) * frameWidth_;
           int ymax = (rosBoxes_[i][j].y + rosBoxes_[i][j].h / 2) * frameHeight_;
 
-//	  boundingBoxClass_.append(classLabels_[i]);
-	  boundingBoxClass_.data += classLabels_[i].c_str();
-	  boundingBoxClass_.data += " ";
-	  Cmd2Motor.position = {0};
+//-------------------------------------------------------------modified
+          boundingBoxClass.data += classLabels_[i].c_str();
+          boundingBoxClass.data += " ";
+//-------------------------------------------------------------
 
           boundingBox.Class = classLabels_[i];
           boundingBox.probability = rosBoxes_[i][j].prob;
@@ -650,18 +638,21 @@ void *YoloObjectDetector::publishInThread()
     boundingBoxesResults_.header.stamp = ros::Time::now();
     boundingBoxesResults_.header.frame_id = "detection";
     boundingBoxesResults_.image_header = imageHeader_;
+    boundingBoxesPublisher_.publish(boundingBoxesResults_);
 
-    if (boundingBoxClass_.data.find("cell phone") != std::string::npos){
-      boundingBoxClass_.data = "cell phone";
-      Cmd2Motor.position = {3};
+//-------------------------------------------------------------modified
+    if (boundingBoxClass.data.find("cell phone") != std::string::npos){
+      boundingBoxClass.data = "cell phone";
+      cmd2Robot.data = 1;
     } else {
-      boundingBoxClass_.data = "";
-      Cmd2Motor.position = {0};
+      boundingBoxClass.data = "";
+      cmd2Robot.data = 0;
     }
 
-    detectedObjectClassPublisher_.publish(boundingBoxClass_);
-    Command2MotorPublisher_.publish(Cmd2Motor);
-    boundingBoxesPublisher_.publish(boundingBoxesResults_);
+    detectedObjectClassPublisher_.publish(boundingBoxClass);
+    cmd2RobotPublisher_.publish(cmd2Robot);
+//---------------------------------------------------------------------
+    
   } else {
     std_msgs::Int8 msg;
     msg.data = 0;

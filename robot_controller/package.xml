@@ -8,6 +8,6 @@
   <maintainer email="jhshim@robotis.com">Ryan Shim</maintainer>
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roscpp</depend>
-  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
   <depend>dynamixel_sdk</depend>
 </package>

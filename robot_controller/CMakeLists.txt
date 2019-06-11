@@ -11,7 +11,7 @@ add_compile_options(-std=c++11)
 ################################################################################
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  sensor_msgs
+  std_msgs
   dynamixel_sdk
 )
 
@@ -31,7 +31,7 @@ find_package(catkin REQUIRED COMPONENTS
 # Declare catkin specific configuration to be passed to dependent projects
 ################################################################################
 catkin_package(
-  CATKIN_DEPENDS roscpp sensor_msgs dynamixel_sdk
+  CATKIN_DEPENDS roscpp std_msgs dynamixel_sdk
 )
 
 ################################################################################

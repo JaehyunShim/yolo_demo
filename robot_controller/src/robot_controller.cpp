@@ -37,7 +37,7 @@
 #include <stdio.h>
 
 #include <ros/ros.h>
-#include <sensor_msgs/JointState.h>
+#include <std_msgs/Int8.h>
 
 #include <dynamixel_sdk/dynamixel_sdk.h>                    // Uses Dynamixel SDK library
 
@@ -114,16 +114,16 @@ int kbhit(void)
 #endif
 }
 
-void goalJointPositionCallback(const sensor_msgs::JointState::ConstPtr &msg)
+void goalJointPositionCallback(const std_msgs::Int8::ConstPtr &msg)
 { 
   int index = 0;
   int dxl_cnt_ = 10;
-  double goal_position[dxl_cnt_] = {0.0, };
-  int dxl_goal_position[2] = {DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE};         // Goal position
+  int dxl_goal_position[2] = {DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE}; // Goal position
 
-  ROS_INFO("%f", msg->position.at(0));
+  ROS_INFO("%f", msg->data);
 
-  if (msg->position.at(0) == 3){
+  if (msg->data == 1){      // 1: Cellphone is detected, 
+                            // 0: Cellphone is not detected
 
     for (uint8_t tmp_index = 0; tmp_index < 2; tmp_index++){
 

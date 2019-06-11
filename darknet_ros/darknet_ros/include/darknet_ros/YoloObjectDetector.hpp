@@ -146,14 +146,16 @@ class YoloObjectDetector
   ros::Publisher objectPublisher_;
   ros::Publisher boundingBoxesPublisher_;
 
-  // Newly added
-  ros::Publisher detectedObjectClassPublisher_;
-  ros::Publisher Command2MotorPublisher_;
-
   //! Detected objects.
   std::vector<std::vector<RosBox_> > rosBoxes_;
   std::vector<int> rosBoxCounter_;
   darknet_ros_msgs::BoundingBoxes boundingBoxesResults_;
+
+//-------------------------------------------------------------modified
+  // Publish to reader and robot
+  ros::Publisher detectedObjectClassPublisher_;
+  ros::Publisher cmd2RobotPublisher_;
+//-------------------------------------------------------------
 
   //! Camera related parameters.
   int frameWidth_;

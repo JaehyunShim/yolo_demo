@@ -33,22 +33,13 @@
 *********************************************************************/
 
 #include <unistd.h>
-#include <sound_play/sound_play.h>
-
-// darknet_ros_msgs
 #include "std_msgs/String.h"
-
-void sleepok(int t, ros::NodeHandle &nh)
-{
-  if (nh.ok())
-      sleep(t);
-}
+#include <sound_play/sound_play.h>
 
 void detectedObjectClassSubscriberCallback(const std_msgs::String::ConstPtr& imageClass)
 {
   sound_play::SoundClient sc;
-  sound_play::SoundClient quiet_sc;
- 
+
   ROS_INFO("%s", imageClass->data.c_str());
   sc.say(imageClass->data.c_str());
 
@@ -60,14 +51,15 @@ void detectedObjectClassSubscriberCallback(const std_msgs::String::ConstPtr& ima
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "object_reader");
-
   ros::NodeHandle nh;
+
   sound_play::SoundClient sc;
-  sound_play::SoundClient quiet_sc;
 
   // Subscribe detected object names
-  ros::Subscriber detectedObjectClassSubscriber_;
-  detectedObjectClassSubscriber_ = nh.subscribe("/darknet_ros/detectedImageClass", 1, detectedObjectClassSubscriberCallback); 
+  ros::Subscriber detectedObjectClassSubscriber;
+  detectedObjectClassSubscriber = nh.subscribe("/darknet_ros/detectedImageClass", 1, detectedObjectClassSubscriberCallback); 
+
+  ROS_INFO("Waiting...");
 
   ros::spin();  
 }
