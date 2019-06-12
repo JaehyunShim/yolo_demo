@@ -1,8 +1,8 @@
 # YOLO test
 
-## Intro
-
 ## Usage
+
+Need items: 
 
 ### Install ROS Kinetic
 ```sh
