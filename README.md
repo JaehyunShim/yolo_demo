@@ -2,7 +2,8 @@
 
 ## Usage
 
-Need items: 
+Need items: Dynamixel 2XL430 x 1, USB video camera x 1, cell phone x 1
+Expected Result: Reponse from the motor and speaker when recognising the phone
 
 ### Install ROS Kinetic
 ```sh
