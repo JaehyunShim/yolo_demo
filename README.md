@@ -18,7 +18,7 @@ $ cd ~/catkin_ws/src/
 $ git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
 $ git clone https://github.com/RyanJaehyunShim/YOLO_study.git
 
-(Download ROS packages)
+(Install ROS packages)
 $ sudo apt-get install ros-kinetic-uvc-camera
 ```
 
