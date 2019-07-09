@@ -15,7 +15,7 @@ $ wget https://raw.githubusercontent.com/RyanJaehyunShim/YOLO_test/master/instal
 $ cd ~/catkin_ws/src/
 
 (Download packages)
-$ git clone https://github.com/RyanJaehyunShim/YOLO_study.git
+$ git clone https://github.com/RyanJaehyunShim/YOLO_test.git
 $ git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
 
 (Install ROS packages)
