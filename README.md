@@ -7,7 +7,7 @@
 ### Install ROS Kinetic
 ```sh
 $ sudo apt-get update && sudo apt-get upgrade
-$ wget https://raw.githubusercontent.com/RyanJaehyunShim/git_test/master/install_ros_kinetic.sh && chmod 755 ./install_ros_kinetic.sh && bash ./install_ros_kinetic.sh
+$ wget https://raw.githubusercontent.com/RyanJaehyunShim/YOLO_test/master/install_ros_kinetic.sh && chmod 755 ./install_ros_kinetic.sh && bash ./install_ros_kinetic.sh
 ```
 ### Install ROS packages
 ```sh
@@ -15,8 +15,8 @@ $ wget https://raw.githubusercontent.com/RyanJaehyunShim/git_test/master/install
 $ cd ~/catkin_ws/src/
 
 (Download packages)
-$ git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
 $ git clone https://github.com/RyanJaehyunShim/YOLO_study.git
+$ git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
 
 (Install ROS packages)
 $ sudo apt-get install ros-kinetic-uvc-camera
