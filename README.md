@@ -7,7 +7,7 @@
 ### Install ROS Kinetic
 ```sh
 $ sudo apt-get update && sudo apt-get upgrade
-$ wget https://raw.githubusercontent.com/RyanJaehyunShim/YOLO_test/master/install_ros_kinetic.sh && chmod 755 ./install_ros_kinetic.sh && bash ./install_ros_kinetic.sh
+$ wget https://raw.githubusercontent.com/jrshim/YOLO_test/master/install_ros_kinetic.sh && chmod 755 ./install_ros_kinetic.sh && bash ./install_ros_kinetic.sh
 ```
 ### Install ROS packages and Build
 ```sh
@@ -15,7 +15,7 @@ $ wget https://raw.githubusercontent.com/RyanJaehyunShim/YOLO_test/master/instal
 $ cd ~/catkin_ws/src/
 
 (Download packages)
-$ git clone https://github.com/RyanJaehyunShim/YOLO_test.git
+$ git clone https://github.com/jrshim/YOLO_test.git
 $ git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
 
 (Install ROS packages)
