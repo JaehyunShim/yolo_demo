@@ -15,11 +15,13 @@ $ wget https://raw.githubusercontent.com/rjshim/YOLO_test/master/install_ros_kin
 $ cd ~/catkin_ws/src/
 
 (Download packages)
-$ git clone https://github.com/jrshim/YOLO_test.git
+$ git clone https://github.com/rjshim/YOLO_test.git
 $ git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
 
-(Install ROS packages)
+(Install binary packages)
 $ sudo apt-get install ros-kinetic-uvc-camera
+$ sudo apt-get install ros-kinetic-sound-play
+$ sudo apt-get install ros-kinetic-darknet-ros-msgs
 
 (Build)
 $ cd ~/catkin_ws && catkin_make
